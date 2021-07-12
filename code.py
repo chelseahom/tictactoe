@@ -50,14 +50,14 @@ def inputPlayerLetter():
     # Returns a list with player 1's letter as the first item, and player 2's letter as the second.
     letter = ''
     while not (letter == 'X' or letter == 'O'):
-        print('Do you want to be player 1 or player 2?')
+        print('Do you want to be X or O?')
         answer = input()
-        if answer.lower() == 'player 1' or answer == '1':
+        if answer.lower() == 'x':
             letter = 'X'
-        elif answer.lower() == 'player 2' or answer == '2':
+        elif answer.lower() == 'o':
             letter = 'O'
         else:
-            print('Please pick player 1 or player 2.')
+            print('Please pick X or O.')
 
     # the first element in the tuple is player 1's letter, the second is player 2's letter.
     if letter == 'X':
@@ -69,9 +69,9 @@ def inputPlayerLetter():
 def whoGoesFirst():
     # Randomly choose the player who goes first.
     if random.randint(0, 1) == 0:
-        return 'Player 2'
+        return 'O'
     else:
-        return 'Player 1'
+        return 'X'
 
 
 def playAgain():
@@ -85,20 +85,20 @@ def isSpaceFree(board, move):
     return board[move] == ' '
 
 
-def getPlayer1Move(board):
-    # Let player 1 type in their move.
+def getXMove(board):
+    # Let player X type in their move.
     move = ' '
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
-        print('What is player 1\'s next move? (1-9)')
+        print('What is X\'s next move? (1-9)')
         move = input()
     return int(move)
 
 
-def getPlayer2Move(board):
-    # Let player 2 type in their move.
+def getOMove(board):
+    # Let player O type in their move.
     move = ' '
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
-        print('What is player 2\'s next move? (1-9)')
+        print('What O\'s next move? (1-9)')
         move = input()
     return int(move)
 
@@ -116,9 +116,7 @@ _____|_____|_____
      |     |     
 ''')
 print('This is how the Tic-Tac-Toe board will look.')
-print('When it is your turn, type the corresponding number of the square you want to place your letter in.')
-print('Press enter to continue.')
-input()
+print('When it is your turn, type the corresponding number of the square you want to place your letter in.\n')
 
 while True:
     # Reset the board
@@ -130,10 +128,10 @@ while True:
     board = Board(theBoard)
 
     while gameIsPlaying:
-        if turn == 'player 1':
-            # Player 1's turn.
+        if turn == 'X':
+            # Player X's turn.
             board.drawBoard()
-            move = getPlayer1Move(theBoard)
+            move = getXMove(theBoard)
             board.makeMove(player1Letter, move)
 
             if board.isWinner(player1Letter):
@@ -146,12 +144,12 @@ while True:
                     print('The game is a tie!')
                     break
                 else:
-                    turn = 'player 2'
+                    turn = 'O'
 
         else:
-            # Player 2's turn.
+            # Player O's turn.
             board.drawBoard()
-            move = getPlayer2Move(theBoard)
+            move = getOMove(theBoard)
             board.makeMove(player2Letter, move)
 
             if board.isWinner(player2Letter):
@@ -164,7 +162,7 @@ while True:
                     print('The game is a tie!')
                     break
                 else:
-                    turn = 'player 1'
+                    turn = 'X'
 
     if not playAgain():
         break
