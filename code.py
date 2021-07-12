@@ -11,17 +11,15 @@ class Board:
         # This function prints out the board that it was passed.
 
         # "board" is a list of 10 strings representing the board (ignore index 0)
-        print('   |   |')
-        print(' ' + self.board[7] + ' | ' + self.board[8] + ' | ' + self.board[9])
-        print('   |   |')
-        print('-----------')
-        print('   |   |')
-        print(' ' + self.board[4] + ' | ' + self.board[5] + ' | ' + self.board[6])
-        print('   |   |')
-        print('-----------')
-        print('   |   |')
-        print(' ' + self.board[1] + ' | ' + self.board[2] + ' | ' + self.board[3])
-        print('   |   |')
+        print('     |     |     ')
+        print('  ' + self.board[7] + '  |  ' + self.board[8] + '  |  ' + self.board[9] + '  ')
+        print('_____|_____|_____')
+        print('     |     |     ')
+        print('  ' + self.board[4] + '  |  ' + self.board[5] + '  |  ' + self.board[6] + '  ')
+        print('_____|_____|_____')
+        print('     |     |     ')
+        print('  ' + self.board[1] + '  |  ' + self.board[2] + '  |  ' + self.board[3] + '  ')
+        print('     |     |     ')
 
     def makeMove(self, letter, move):
         self.board[move] = letter
@@ -54,9 +52,9 @@ def inputPlayerLetter():
     while not (letter == 'X' or letter == 'O'):
         print('Do you want to be player 1 or player 2?')
         answer = input()
-        if answer.lower() == 'player 1':
+        if answer.lower() == 'player 1' or answer == '1':
             letter = 'X'
-        elif answer.lower() == 'player 2':
+        elif answer.lower() == 'player 2' or answer == '2':
             letter = 'O'
         else:
             print('Please pick player 1 or player 2.')
@@ -71,9 +69,9 @@ def inputPlayerLetter():
 def whoGoesFirst():
     # Randomly choose the player who goes first.
     if random.randint(0, 1) == 0:
-        return 'player 2'
+        return 'Player 2'
     else:
-        return 'player 1'
+        return 'Player 1'
 
 
 def playAgain():
@@ -88,7 +86,7 @@ def isSpaceFree(board, move):
 
 
 def getPlayer1Move(board):
-    # Let the player type in his move.
+    # Let player 1 type in their move.
     move = ' '
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
         print('What is player 1\'s next move? (1-9)')
@@ -97,7 +95,7 @@ def getPlayer1Move(board):
 
 
 def getPlayer2Move(board):
-    # Let the player type in his move.
+    # Let player 2 type in their move.
     move = ' '
     while move not in '1 2 3 4 5 6 7 8 9'.split() or not isSpaceFree(board, int(move)):
         print('What is player 2\'s next move? (1-9)')
@@ -105,8 +103,22 @@ def getPlayer2Move(board):
     return int(move)
 
 
-
 print('Welcome to Tic Tac Toe!')
+print('''
+     |     |     
+  7  |  8  |  9  
+_____|_____|_____
+     |     |     
+  4  |  5  |  6  
+_____|_____|_____
+     |     |     
+  1  |  2  |  3  
+     |     |     
+''')
+print('This is how the Tic-Tac-Toe board will look.')
+print('When it is your turn, type the corresponding number of the square you want to place your letter in.')
+print('Press enter to continue.')
+input()
 
 while True:
     # Reset the board
